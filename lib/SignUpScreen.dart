@@ -253,46 +253,30 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
 
    void _createStudent() async {
     
-    final CollectionReference _myCollection = firestore.collection('students');
 
     String email = emailController.text;
     String password = passwordController.text;
     String name = nameController.text;
     String username = usernameController.text;
+    
+    
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference usersCollection = firestore.collection('students');
 
-    Map<String, dynamic> data = {
-        
-        "name": name,
+    DocumentReference newUserRef = usersCollection.doc();
+
+    String newUserId = newUserRef.id;
+
+    newUserRef.set({
+      "name": name,
         "username": username,
         "email": email,
         "password": password
-      };
-            try {
-        // Add data to the main collection
-        await _myCollection.add({'data': data});
-
-        // Get a reference to the newly added document
-        QuerySnapshot querySnapshot = await _myCollection.get();
-        DocumentSnapshot documentSnapshot = querySnapshot.docs.last;
-        String documentId = documentSnapshot.id;
-
-        // Add a subcollection named 'affiliations' to the newly added document
-        CollectionReference affiliationsRef = _myCollection
-            .doc(documentId)
-            .collection('affiliations');
-
-        // Add data to the subcollection
-        await affiliationsRef.add({'clubs': name});
-
-        print('Data added successfully');
-      } catch (e) {
-        print('Error adding data: $e');
-      }
-       
+    });
+    
   }
   
   
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
