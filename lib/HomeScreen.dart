@@ -1,4 +1,5 @@
 import 'package:admin/SignUpScreen.dart';
+import 'package:admin/createClub.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -87,7 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: EdgeInsets.only(bottom: 10),
                       child: TextButton(
                         onPressed: () {
-                         
+                           Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                            return CreateClub();
+                          }));
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll < Color > (Color.fromARGB(255, 251, 183, 24)),

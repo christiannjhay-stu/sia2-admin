@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 
-class SignUpScreen extends StatefulWidget {
+class CreateClub extends StatefulWidget {
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  CreateClubState createState() => CreateClubState();
 }
 
 Widget Footer() {
@@ -60,37 +60,7 @@ Widget buildFirstName() {
     ],
   );
 }
-Widget buildLastName() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: < Widget > [
-      SizedBox(height: 10),
-      Container(
-        alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(
-          color: const Color(0xff3A4859),
-            borderRadius: BorderRadius.circular(10),
-        ),
-        height: 60,
-        width: 340,
-        child: TextField(
-          keyboardType: TextInputType.emailAddress,
-          style: TextStyle(
-            color: Colors.white
-          ),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.only(top: 8, left: 20),
-            hintText: 'Lastname',
-            hintStyle: TextStyle(
-              color: Colors.white,
-            )
-          ),
-        )
-      )
-    ],
-  );
-}
+
 Widget buildSEmail() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +93,7 @@ Widget buildSEmail() {
     ],
   );
 }
-Widget buildSUsername() {
+Widget buildDescription() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: < Widget > [
@@ -145,7 +115,7 @@ Widget buildSUsername() {
           decoration: InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.only(top: 8, left: 20),
-            hintText: 'Username',
+            hintText: 'Description',
             hintStyle: TextStyle(
               color: Colors.white,
             )
@@ -155,7 +125,7 @@ Widget buildSUsername() {
     ],
   );
 }
-Widget buildSPassword() {
+Widget buildIcon() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: < Widget > [
@@ -170,15 +140,15 @@ Widget buildSPassword() {
         width: 340,
         child: TextField(
           controller: passwordController,
-          obscureText: true,
-          keyboardType: TextInputType.emailAddress,
+          
+          keyboardType: TextInputType.text,
           style: TextStyle(
             color: Colors.white
           ),
           decoration: InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.only(top: 8, left: 20),
-            hintText: 'Password',
+            hintText: 'Icon Link',
             hintStyle: TextStyle(
               color: Colors.white,
 
@@ -190,38 +160,7 @@ Widget buildSPassword() {
   );
 }
 
-Widget buildConfirmPassword() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: < Widget > [
-      SizedBox(height: 10),
-      Container(
-        alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(
-          color: const Color(0xff3A4859),
-            borderRadius: BorderRadius.circular(10),
-        ),
-        height: 60,
-        width: 340,
-        child: TextField(
-          obscureText: true,
-          keyboardType: TextInputType.emailAddress,
-          style: TextStyle(
-            color: Colors.white
-          ),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.only(top: 8, left: 20),
-            hintText: 'Confirm Password',
-            hintStyle: TextStyle(
-              color: Colors.white,
-            )
-          ),
-        )
-      )
-    ],
-  );
-}
+
 
 Widget Logo(){
   return Center(
@@ -241,7 +180,7 @@ final nameController = TextEditingController();
 final usernameController = TextEditingController();
     
 
-class _SignUpScreenState extends State < SignUpScreen > {
+class CreateClubState extends State < CreateClub > {
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -260,17 +199,17 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
     
     
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference usersCollection = firestore.collection('students');
+    CollectionReference usersCollection = firestore.collection('clubs');
 
     DocumentReference newUserRef = usersCollection.doc();
 
     String newUserId = newUserRef.id;
 
     newUserRef.set({
-      "name": name,
-        "username": username,
+        "name": name,
+        "description": username,
         "email": email,
-        "password": password
+        "logo": password
     });
     
   }
@@ -281,7 +220,7 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 9, 26, 47),
-        title:Text('Create Student'),
+        title:Text('Create Club'),
       ),
       body: AnnotatedRegion < SystemUiOverlayStyle > (
         value: SystemUiOverlayStyle.light,
@@ -298,7 +237,7 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
                     Padding(
                       padding: const EdgeInsets.only(top: 80.0),
                         child: Text(
-                          'Ateneo de Davao\nUniversity\nCreate Student',
+                          'Ateneo de Davao\nUniversity\nCreate Club',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255),
@@ -312,9 +251,9 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
                     Logo(),
                     SizedBox(height: 20),
                     buildFirstName(),
-                    buildSUsername(),
+                   buildDescription(),
                     buildSEmail(),
-                    buildSPassword(),
+                    buildIcon(),
                     SizedBox(height: 12),
                     Container(
                       width: 340,
@@ -323,11 +262,6 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
                         onPressed: () {
                           _createStudent();
                           
-                          FirebaseAuth.instance.createUserWithEmailAndPassword(
-                            email: emailController.text.trim(), 
-                            password: passwordController.text.trim()
-                            
-                          );
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               backgroundColor: Color.fromARGB(255, 27, 100, 25), // set the background color
@@ -350,7 +284,7 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
                           )
                         ),
                         child: Text(
-                          'Create Account',
+                          'Create Club',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
