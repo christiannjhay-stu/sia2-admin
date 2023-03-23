@@ -2,19 +2,19 @@ import 'package:admin/HomeScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class CreateClub extends StatefulWidget {
+class CreateStudent extends StatefulWidget {
 
-  const CreateClub({
+  const CreateStudent({
     Key ? key
   }): super(key: key);
 
   @override
-  State < CreateClub > createState() => _CreateClubState();
+  State < CreateStudent > createState() => _CreateStudentState();
 }
 
 
 
-class _CreateClubState extends State < CreateClub > {
+class _CreateStudentState extends State < CreateStudent > {
 
 
     final emailController = TextEditingController();
@@ -32,17 +32,17 @@ class _CreateClubState extends State < CreateClub > {
     String username = usernameController.text;
 
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference usersCollection = firestore.collection('clubs');
+    CollectionReference usersCollection = firestore.collection('students');
 
     DocumentReference newUserRef = usersCollection.doc();
 
     String newUserId = newUserRef.id;
 
     newUserRef.set({
-        "name": name,
-        "description": username,
+      "name": name,
+        "username": username,
         "email": email,
-        "logo": password
+        "password": password
     });
 
   }
@@ -54,13 +54,13 @@ class _CreateClubState extends State < CreateClub > {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 9, 26, 47),
-        title: const Text('Create Club'), ),
+        title: const Text('Create Student'), ),
       body: ListView(
         children: < Widget > [
           Container(
             padding: const EdgeInsets.only(top: 30),
               child: Text(
-                'Ateneo de Davao\nUniversity\nCreate Club',
+                'Ateneo de Davao\nUniversity\nCreate Student',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -135,7 +135,7 @@ class _CreateClubState extends State < CreateClub > {
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.only(top: 8, left: 20),
-                      hintText: 'Description',
+                      hintText: 'Username',
                       hintStyle: TextStyle(
                         color: Colors.white,
                       )
@@ -192,15 +192,15 @@ class _CreateClubState extends State < CreateClub > {
                   width: 340,
                   child: TextField(
                     controller: passwordController,
-                    
-                    keyboardType: TextInputType.text,
+                    obscureText: true,
+                    keyboardType: TextInputType.emailAddress,
                     style: TextStyle(
                       color: Colors.white
                     ),
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.only(top: 8, left: 20),
-                      hintText: 'Icon Link',
+                      hintText: 'Password',
                       hintStyle: TextStyle(
                         color: Colors.white,
 
@@ -224,7 +224,7 @@ class _CreateClubState extends State < CreateClub > {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       backgroundColor: Color.fromARGB(255, 27, 100, 25), // set the background color
-                      content: Text('Club Successfully Created'), // set the message text
+                      content: Text('Account Successfully Created'), // set the message text
                       duration: Duration(seconds: 2), // set the duration for how long the message will be displayed
                     ),
                   );
@@ -243,7 +243,7 @@ class _CreateClubState extends State < CreateClub > {
                   )
                 ),
                 child: Text(
-                  'Create Club',
+                  'Create Student',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

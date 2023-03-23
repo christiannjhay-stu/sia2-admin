@@ -283,12 +283,14 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
         backgroundColor: Color.fromARGB(255, 9, 26, 47),
         title:Text('Create Student'),
       ),
-      body: AnnotatedRegion < SystemUiOverlayStyle > (
-        value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
+      body: ListView (
+        children: <Widget>[
+          GestureDetector(
           child: Stack(
             children: < Widget > [
-              Container(
+              
+              Expanded(
+                child: Container(
                 height: double.infinity,
                 width: double.infinity,
                 decoration: BoxDecoration(),
@@ -309,57 +311,20 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
                         ),
                     ),
                     SizedBox(height: 25),
-                    Logo(),
+                    Center(
+                    child: Image.asset(
+                      'assets/images/adduLogo.png',
+                      width: 200,
+                      height: 200,
+                        )
+                    ),              
                     SizedBox(height: 20),
                     buildFirstName(),
                     buildSUsername(),
                     buildSEmail(),
                     buildSPassword(),
                     SizedBox(height: 12),
-                    Container(
-                      width: 340,
-                      height: 60,
-                      child: TextButton(
-                        onPressed: () {
-                          _createStudent();
-                          
-                          FirebaseAuth.instance.createUserWithEmailAndPassword(
-                            email: emailController.text.trim(), 
-                            password: passwordController.text.trim()
-                            
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: Color.fromARGB(255, 27, 100, 25), // set the background color
-                              content: Text('Account Successfully Created'), // set the message text
-                              duration: Duration(seconds: 2), // set the duration for how long the message will be displayed
-                            ),
-                          ); 
-
-                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-                            return HomeScreen();
-                          }));
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll < Color > (Color(0xffFBB718)),
-                          shape: MaterialStateProperty.all < RoundedRectangleBorder > (
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-
-                            )
-                          )
-                        ),
-                        child: Text(
-                          'Create Account',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontFamily: "Noopla"
-                          ),
-
-                        ),
-                      ),
-                    ),
+                  
                     SizedBox(height: 12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -371,9 +336,13 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
                   ],
                 ),
               )
+              )
+              
             ],
           ),
         ),
+        ],
+        
       ),
     );
   }
