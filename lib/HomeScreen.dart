@@ -1,6 +1,5 @@
 
 import 'package:admin/CreateStudent.dart';
-import 'package:admin/SignUpScreen.dart';
 import 'package:admin/createClub.dart';
 import 'package:flutter/material.dart';
 

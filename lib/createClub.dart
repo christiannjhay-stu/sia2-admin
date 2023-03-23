@@ -1,5 +1,6 @@
 import 'package:admin/HomeScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CreateClub extends StatefulWidget {
@@ -220,6 +221,8 @@ class _CreateClubState extends State < CreateClub > {
                 onPressed: () {
 
                   _createStudent();
+
+                  
 
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(

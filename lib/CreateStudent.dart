@@ -1,5 +1,6 @@
 import 'package:admin/HomeScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CreateStudent extends StatefulWidget {
@@ -220,6 +221,12 @@ class _CreateStudentState extends State < CreateStudent > {
                 onPressed: () {
 
                   _createStudent();
+
+                   FirebaseAuth.instance.createUserWithEmailAndPassword(
+                            email: emailController.text.trim(), 
+                            password: passwordController.text.trim()
+                            
+                  );
 
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
