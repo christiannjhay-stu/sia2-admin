@@ -32,19 +32,47 @@ class _CreateStudentState extends State < CreateStudent > {
     String name = nameController.text;
     String username = usernameController.text;
 
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference usersCollection = firestore.collection('students');
+       FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
-    DocumentReference newUserRef = usersCollection.doc();
+      // Create a collection reference
+      CollectionReference teachersCollectionRef = firestoreInstance.collection('students');
 
-    String newUserId = newUserRef.id;
-
-    newUserRef.set({
-      "name": name,
+      // Create a document and add it to the collection
+      DocumentReference newTeacherDocRef = teachersCollectionRef.doc();
+      newTeacherDocRef.set({
+        "name": name,
         "username": username,
         "email": email,
-        "password": password
-    });
+        "password": password,
+         "section": ''
+      });
+
+      // Create a subcollection reference for the new document
+      CollectionReference coursesCollectionRef = newTeacherDocRef.collection('affiliations');
+
+      // Add a document to the subcollection
+      coursesCollectionRef.add({
+        'name': 'Filipino',
+        'Grade1': '',
+        'Grade2': '',
+        'Grade3': '',
+        'Grade4': '',
+      });
+
+      coursesCollectionRef.add({
+        'name': 'TLE',
+        'Grade1': '',
+        'Grade2': '',
+        'Grade3': '',
+        'Grade4': '',
+      });
+
+
+
+   
+
+
+
 
   }
       

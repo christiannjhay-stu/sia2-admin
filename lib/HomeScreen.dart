@@ -1,6 +1,7 @@
 
 import 'package:admin/CreateStudent.dart';
 import 'package:admin/createClub.dart';
+import 'package:admin/teachers.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -103,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           )
                         ),
                         child: Text(
-                          'Create Club',
+                          'Create Teacher',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -117,7 +118,125 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
             ),
-           )
+           ),
+
+           drawer: Drawer(
+        backgroundColor: Color.fromARGB(255, 9, 26, 47),
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+          children: [
+
+            SizedBox(height: 20),
+             ListTileTheme(
+              child: ListTile(
+                
+               
+                  onTap: () {
+
+                  },
+                  textColor: Colors.white,
+                  iconColor: Colors.white,
+              )
+            ),
+            SizedBox(height: 30),
+            ListTileTheme(
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: Color.fromARGB(255, 251, 183, 24)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                leading: Icon(Icons.home),
+                title: const Text('Home'),
+                  onTap: () {
+
+                  },
+                  textColor: Colors.white,
+                  iconColor: Colors.white,
+              )
+            ),
+            SizedBox(height: 4),
+            ListTileTheme(
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: Color.fromARGB(255, 251, 183, 24)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                leading: Icon(Icons.work),
+                title: const Text('View Teachers'),
+                  onTap: () {
+                     Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
+                      return Teachers();
+                    }));
+                  },
+                  textColor: Colors.white,
+                  iconColor: Colors.white,
+              )
+            ),
+            SizedBox(height: 4),
+            ListTileTheme(
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: Color.fromARGB(255, 251, 183, 24)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                leading: Icon(Icons.document_scanner),
+                title: const Text('My Information'),
+                  onTap: () {
+                      
+                  },
+                  textColor: Colors.white,
+                  iconColor: Colors.white,
+              )
+            ),
+            SizedBox(height: 520),
+            ListTileTheme(
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: Color.fromARGB(255, 251, 183, 24)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                leading: Icon(Icons.settings),
+                title: const Text('Settings'),
+                  onTap: () {
+
+                  },
+                  textColor: Colors.white,
+                  iconColor: Colors.white,
+              )
+            ),
+            
+            SizedBox(height: 4),
+            ListTileTheme(
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: Color.fromARGB(255, 251, 183, 24)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                leading: Icon(Icons.logout),
+                title: const Text('Log out'),
+                  onTap: () {
+
+                   
+
+
+                     ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Color.fromARGB(255, 255, 0, 0), // set the background color
+                        content: Text('Logged out'), // set the message text
+                        duration: Duration(seconds: 2), // set the duration for how long the message will be displayed
+                      ),
+                    );
+
+
+                  },
+                  textColor: Colors.white,
+                  iconColor: Colors.white,
+              )
+            ),
+          ],
+        ),
+      ),
        );
   }
 }

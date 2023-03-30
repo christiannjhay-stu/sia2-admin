@@ -33,7 +33,7 @@ class _CreateClubState extends State < CreateClub > {
     String username = usernameController.text;
 
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference usersCollection = firestore.collection('clubs');
+    CollectionReference usersCollection = firestore.collection('teachers');
 
     DocumentReference newUserRef = usersCollection.doc();
 
@@ -43,7 +43,8 @@ class _CreateClubState extends State < CreateClub > {
         "name": name,
         "description": username,
         "email": email,
-        "logo": password
+        "password":password,
+        "section": ''
     });
 
   }
@@ -193,7 +194,7 @@ class _CreateClubState extends State < CreateClub > {
                   width: 340,
                   child: TextField(
                     controller: passwordController,
-                    
+                    obscureText: true,
                     keyboardType: TextInputType.text,
                     style: TextStyle(
                       color: Colors.white
@@ -201,7 +202,7 @@ class _CreateClubState extends State < CreateClub > {
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.only(top: 8, left: 20),
-                      hintText: 'Icon Link',
+                      hintText: 'Password',
                       hintStyle: TextStyle(
                         color: Colors.white,
 
@@ -222,12 +223,16 @@ class _CreateClubState extends State < CreateClub > {
 
                   _createStudent();
 
-                  
+                   FirebaseAuth.instance.createUserWithEmailAndPassword(
+                            email: emailController.text.trim(), 
+                            password: passwordController.text.trim()
+                            
+                  );
 
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       backgroundColor: Color.fromARGB(255, 27, 100, 25), // set the background color
-                      content: Text('Club Successfully Created'), // set the message text
+                      content: Text('Teacher Successfully Created'), // set the message text
                       duration: Duration(seconds: 2), // set the duration for how long the message will be displayed
                     ),
                   );
