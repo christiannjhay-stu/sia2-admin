@@ -1,6 +1,7 @@
 
 import 'package:admin/CreateStudent.dart';
 import 'package:admin/createClub.dart';
+import 'package:admin/students.dart';
 import 'package:admin/teachers.dart';
 import 'package:flutter/material.dart';
 
@@ -181,9 +182,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 leading: Icon(Icons.document_scanner),
-                title: const Text('My Information'),
+                title: const Text('View Students'),
                   onTap: () {
-                      
+                       Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
+                      return Students();
+                    }));
                   },
                   textColor: Colors.white,
                   iconColor: Colors.white,
