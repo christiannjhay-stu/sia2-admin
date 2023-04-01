@@ -1,3 +1,4 @@
+import 'package:admin/StudentDetails.dart';
 import 'package:admin/details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class _StudentsState extends State<Students> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Details( data: mapData, documentId: docID, ),
+                      builder: (context) => StudentDetails(data: mapData, documentId: docID, ),
                     ),
                   );
                 },
