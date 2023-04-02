@@ -13,7 +13,13 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
-  
+
+  Future<void> deleteDocument(String documentId) async {
+  await FirebaseFirestore.instance
+      .collection('teachers')
+      .doc(widget.documentId)
+      .delete();
+}
    @override
    Widget build(BuildContext context) {
        
@@ -57,32 +63,38 @@ class _DetailsState extends State<Details> {
                 ),
                 new IconButton(
                         icon: Icon(Icons.edit,
-                        color: Colors.red,),
+                        color: Color.fromARGB(255, 255, 251, 0),),
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
                             
                             return EditTeacherScreen(documentId: widget.documentId);
                           }));
                           
-                          /*Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-                            return FirestoreDataScreen();
-                          }));*/
+ 
+                        },
+                      ),
 
-
+                Builder(
+                    builder: (BuildContext context) {
+                      return IconButton(
+                        icon: Icon(Icons.delete, color: Color.fromARGB(255, 255, 0, 0),),
+                        onPressed: () {
+                          // Replace 'documentId' with the ID of the current document
+                          deleteDocument(widget.documentId);
+                          
+                          Navigator.pop(context);
                            ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              backgroundColor: Color.fromARGB(255, 255, 0, 0), // set the background color
-                              content: Text('Leave'), // set the message text
+                              backgroundColor: Color.fromARGB(255, 189, 27, 27), // set the background color
+                              content: Text('Successfully Deleted'), // set the message text
                               duration: Duration(seconds: 2), // set the duration for how long the message will be displayed
                             ),
                           ); 
-                          
                         },
-                      ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(data['section'],style: TextStyle(color: Colors.white),),
-                ),
+                      );
+                    },
+                  )
+               
                 
               ],
             ),

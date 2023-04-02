@@ -11,6 +11,13 @@ class StudentDetails extends StatefulWidget {
 
 class _StudentDetailsState extends State<StudentDetails> {
 
+
+    Future<void> deleteDocument(String documentId) async {
+     await FirebaseFirestore.instance
+      .collection('collectionName')
+      .doc(widget.documentId)
+      .delete();
+}
    @override
    Widget build(BuildContext context) {
        
@@ -60,14 +67,16 @@ class _StudentDetailsState extends State<StudentDetails> {
                             
                             return EditTeacherScreen(documentId: widget.documentId);
                           }));
-                          
-                         
-
-                           
-                          
+                        
                         },
                       ),
-              
+                IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          // Replace 'documentId' with the ID of the current document
+                          deleteDocument(widget.documentId);
+                        },
+                      )
               ],
             ),
           );
