@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           )
                         ),
                         child: Text(
-                          'Create Student',
+                          'Create Announcement',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
