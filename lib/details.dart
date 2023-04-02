@@ -1,5 +1,5 @@
 
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -15,10 +15,35 @@ class Details extends StatefulWidget {
 class _DetailsState extends State<Details> {
 
   Future<void> deleteDocument(String documentId) async {
-  await FirebaseFirestore.instance
+    // Get the document from Firestore
+  DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+      .collection('teachers')
+      .doc(widget.documentId)
+      .get();
+
+      // Get the email address from the document
+      String email = documentSnapshot.get('email');
+      String password = documentSnapshot.get('password');
+
+
+       // Delete the document from Firestore
+      await FirebaseFirestore.instance
       .collection('teachers')
       .doc(widget.documentId)
       .delete();
+
+      
+      // Find the user with the email address and delete them from Firebase Authentication
+      User? userToDelete = await FirebaseAuth.instance
+          .fetchSignInMethodsForEmail(email)
+          .then((providers) => FirebaseAuth.instance.signInWithCredential(
+                EmailAuthProvider.credential(email: email, password: password),
+              ).then((userCredential) => userCredential.user));
+
+      if (userToDelete != null) {
+        await userToDelete.delete();
+      }
+
 }
    @override
    Widget build(BuildContext context) {
