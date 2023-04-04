@@ -1,5 +1,6 @@
 
 import 'package:admin/CreateStudent.dart';
+import 'package:admin/createAnnouncement.dart';
 import 'package:admin/createClub.dart';
 import 'package:admin/students.dart';
 import 'package:admin/teachers.dart';
@@ -62,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: TextButton(
                         onPressed: () {
                             Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-                            return CreateStudent();
+                            return CreateAnnouncement();
                           }));
                         },
                         style: ButtonStyle(
