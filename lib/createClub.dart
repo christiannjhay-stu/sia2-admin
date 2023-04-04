@@ -41,10 +41,17 @@ class _CreateClubState extends State < CreateClub > {
 
     newUserRef.set({
         "name": name,
-        "description": username,
+        "gender": username,
         "email": email,
         "password":password,
-        "section": ''
+        "section": '',
+        "birthday":'',
+        "address":'',
+        "grade":'',
+        "MT":'',
+        "religion":'',
+        "contact":'',
+
     });
 
   }
@@ -56,13 +63,13 @@ class _CreateClubState extends State < CreateClub > {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 9, 26, 47),
-        title: const Text('Create Club'), ),
+        title: const Text('Create Teacher'), ),
       body: ListView(
         children: < Widget > [
           Container(
             padding: const EdgeInsets.only(top: 30),
               child: Text(
-                'Ateneo de Davao\nUniversity\nCreate Club',
+                'Antonio Pichon Jr.\nElementary School\nCreate Teacher',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -137,7 +144,7 @@ class _CreateClubState extends State < CreateClub > {
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.only(top: 8, left: 20),
-                      hintText: 'Description',
+                      hintText: 'Gender',
                       hintStyle: TextStyle(
                         color: Colors.white,
                       )
@@ -251,7 +258,7 @@ class _CreateClubState extends State < CreateClub > {
                   )
                 ),
                 child: Text(
-                  'Create Club',
+                  'Create Teacher',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -268,7 +275,7 @@ class _CreateClubState extends State < CreateClub > {
               padding: const EdgeInsets.only(top: 20),
                 child: Text(
                   textAlign: TextAlign.center,
-                  'By using Ateneo you agree to our Term of Service and\nPrivacy Policy.',
+                  'By using APJES you agree to our Term of Service and\nPrivacy Policy.',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 10,
