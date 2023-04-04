@@ -433,12 +433,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     color: Colors.white
                   )
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
+              
               ),
                 TextFormField(
                 style: TextStyle(
@@ -455,12 +450,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     color: Colors.white
                   )
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
+                
               ),
                 TextFormField(
                 style: TextStyle(
@@ -477,12 +467,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     color: Colors.white
                   )
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
+               
               ),
                 TextFormField(
                   enabled: false,
@@ -500,12 +485,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     color: Colors.white
                   )
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
+                
               ),
                 TextFormField(
                 style: TextStyle(
@@ -522,12 +502,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     color: Colors.white
                   )
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
+               
               ),
               TextFormField(
                 style: TextStyle(
@@ -544,12 +519,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     color: Colors.white
                   )
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
+               
               ),
               TextFormField(
                 style: TextStyle(
@@ -566,12 +536,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     color: Colors.white
                   )
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
+                
               ),
               TextFormField(
                 style: TextStyle(
@@ -588,12 +553,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     color: Colors.white
                   )
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
+                
               ),
               TextFormField(
                 style: TextStyle(
@@ -610,12 +570,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     color: Colors.white
                   )
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
+               
               ),
               TextFormField(
                 style: TextStyle(
@@ -632,12 +587,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     color: Colors.white
                   )
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
+                
               ),
               TextFormField(
                 style: TextStyle(
@@ -654,12 +604,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     color: Colors.white
                   )
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
+                
               ),
               TextFormField(
                 style: TextStyle(
