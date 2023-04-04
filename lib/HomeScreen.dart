@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 80.0),
                         child: Text(
-                          'Ateneo de Davao\nUniversity',
+                          'ADMIN',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255),
