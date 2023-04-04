@@ -84,7 +84,9 @@ Future<void> deleteDocuments(String documentId) async {
    Widget build(BuildContext context) {
        
        return Scaffold(
-           appBar: AppBar(title: const Text('Student Details'),),
+           appBar: AppBar(
+            backgroundColor: Color.fromARGB(255, 9, 26, 47),
+            title: const Text('Student Details'),),
            body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection('students')
@@ -384,6 +386,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 9, 26, 47),
         title: Text('Edit Student'),
       ),
       body: Padding(

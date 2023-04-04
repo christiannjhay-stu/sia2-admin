@@ -50,7 +50,9 @@ class _DetailsState extends State<Details> {
    Widget build(BuildContext context) {
        
        return Scaffold(
-           appBar: AppBar(title: const Text('Teacher Details'),),
+           appBar: AppBar(
+            backgroundColor: Color.fromARGB(255, 9, 26, 47),
+            title: const Text('Teacher Details'),),
            body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection('teachers')
@@ -333,6 +335,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 9, 26, 47),
         title: Text('Edit Teacher'),
       ),
       body: Padding(

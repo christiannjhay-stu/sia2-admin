@@ -16,7 +16,9 @@ class _TeachersState extends State<Teachers> {
    @override
    Widget build(BuildContext context) {
        return Scaffold(
-           appBar: AppBar(title: const Text('Teachers'),),
+           appBar: AppBar(
+            backgroundColor: Color.fromARGB(255, 9, 26, 47),
+            title: const Text('Teachers'),),
             body: StreamBuilder<QuerySnapshot>(
         stream: _collectionRef.snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
