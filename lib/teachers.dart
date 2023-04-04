@@ -59,6 +59,7 @@ class _TeachersState extends State<Teachers> {
                 color: Color.fromARGB(255, 9, 26, 47).withOpacity(0.2),
                   child: ListTile(
                   leading: CircleAvatar(
+                    
                   radius: 30,
                  
                 ),
@@ -70,12 +71,12 @@ class _TeachersState extends State<Teachers> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(''),
-                      Text(mapData['section'] ?? '',
+                      Text(mapData['email'] ?? '',
                   style: TextStyle(
                     color: Colors.white
                   ),),
                       Text(''),
-                      Text(mapData['email'] ?? '',
+                      Text(mapData['section'] ?? '',
                   style: TextStyle(
                     color: Color.fromARGB(246, 255, 208, 0)
                   ),),

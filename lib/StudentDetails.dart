@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class StudentDetails extends StatefulWidget {
@@ -12,11 +13,49 @@ class StudentDetails extends StatefulWidget {
 class _StudentDetailsState extends State<StudentDetails> {
 
 
+
+
     Future<void> deleteDocument(String documentId) async {
-     await FirebaseFirestore.instance
-      .collection('collectionName')
+    // Get the document from Firestore
+  DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+      .collection('students')
+      .doc(widget.documentId)
+      .get();
+
+      // Get the email address from the document
+      String email = documentSnapshot.get('email');
+      String password = documentSnapshot.get('password');
+
+
+     final DocumentReference documentReference =
+      FirebaseFirestore.instance.doc('students$documentId');
+      final QuerySnapshot querySnapshot =
+          await documentReference.collection('affiliations').get();
+      for (QueryDocumentSnapshot snapshot in querySnapshot.docs) {
+        await snapshot.reference.delete();
+      }
+      await documentReference.delete();
+
+
+
+       // Delete the document from Firestore
+      await FirebaseFirestore.instance
+      .collection('students')
       .doc(widget.documentId)
       .delete();
+
+      
+      // Find the user with the email address and delete them from Firebase Authentication
+      User? userToDelete = await FirebaseAuth.instance
+          .fetchSignInMethodsForEmail(email)
+          .then((providers) => FirebaseAuth.instance.signInWithCredential(
+                EmailAuthProvider.credential(email: email, password: password),
+              ).then((userCredential) => userCredential.user));
+
+      if (userToDelete != null) {
+        await userToDelete.delete();
+      }
+
 }
    @override
    Widget build(BuildContext context) {
@@ -55,28 +94,116 @@ class _StudentDetailsState extends State<StudentDetails> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 ListTile(
-                  title: Text(data['name'],
-                  style: TextStyle(color: Colors.white),),
-                  subtitle: Text(data['email'],style: TextStyle(color: Colors.white),),
+                  title: Center(
+                  child:Text(data['name'],
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.white
+                ),), 
                 ),
-                new IconButton(
+                subtitle: Column(
+                  children: <Widget>[
+                     SizedBox(height: 10,),
+                    Text('Grade', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['grade'], style: TextStyle(
+                      color: Colors.white
+                    ), ),
+                    SizedBox(height: 10,),
+                    Text('Section', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['section'], style: TextStyle(
+                      color: Colors.white
+                    ), ),
+                   
+                    SizedBox(height: 10,),
+                    Text('LRN', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['LRN'], style: TextStyle(
+                      color: Colors.white
+                    ), ),
+                    SizedBox(height: 10,),
+                    Text('Birthay', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['birthday'], style: TextStyle(
+                      color: Colors.white
+                    ), ),
+                    SizedBox(height: 10,),
+                    Text('Email', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['email'], style: TextStyle(
+                      color: Colors.white
+                    ), ),
+                     SizedBox(height: 10,),
+                     Text('Address', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['address'], style: TextStyle(
+                      color: Colors.white
+                    ), ),
+                     SizedBox(height: 10,),
+                     Text('Mother Tongue', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['MT'], style: TextStyle(
+                      color: Colors.white
+                    ), ),
+                     SizedBox(height: 10,),
+                     Text('Gender', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['gender'], style: TextStyle(
+                      color: Colors.white
+                    ), ),
+                     SizedBox(height: 10,),
+                     Text('Mothers name', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['mother'], style: TextStyle(
+                      color: Colors.white
+                    ), ),
+                     SizedBox(height: 10,),
+                     Text('Fathers name', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['father'], style: TextStyle(
+                      color: Colors.white
+                    ), ),
+                     SizedBox(height: 10,),
+                     Text('Guardian', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['guardian'], style: TextStyle(
+                      color: Colors.white
+                    ), ),
+                     SizedBox(height: 10,),
+                     Text('Relationship with Guardian', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['relationship'], style: TextStyle(
+                      color: Colors.white
+                    ), ),
+                     SizedBox(height: 10,),
+                     Text('Religion', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['religion'], style: TextStyle(
+                      color: Colors.white
+                    ), ),
+                  ],
+                ),
+                ),
+               new IconButton(
                         icon: Icon(Icons.edit,
-                        color: Colors.red,),
+                        color: Color.fromARGB(255, 255, 251, 0),),
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
                             
                             return EditTeacherScreen(documentId: widget.documentId);
                           }));
-                        
+                          
                         },
                       ),
-                IconButton(
-                        icon: Icon(Icons.delete),
+
+                Builder(
+                    builder: (BuildContext context) {
+                      return IconButton(
+                        icon: Icon(Icons.delete, color: Color.fromARGB(255, 255, 0, 0),),
                         onPressed: () {
                           // Replace 'documentId' with the ID of the current document
                           deleteDocument(widget.documentId);
+                          Navigator.pop(context);
+                           ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Color.fromARGB(255, 189, 27, 27), // set the background color
+                              content: Text('Successfully Deleted'), // set the message text
+                              duration: Duration(seconds: 2), // set the duration for how long the message will be displayed
+                            ),
+                          ); 
                         },
-                      )
+                      );
+                    },
+                  ),
               ],
             ),
           );
