@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,39 @@ class StudentDetails extends StatefulWidget {
 
 class _StudentDetailsState extends State<StudentDetails> {
 
+Future<void> deleteDocuments(String documentId) async {
 
+  DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+      .collection('students')
+      .doc(widget.documentId)
+      .get();
+
+      // Get the email address from the document
+      String email = documentSnapshot.get('email');
+      String password = documentSnapshot.get('password');
+
+  final DocumentReference documentReference =
+      FirebaseFirestore.instance.doc('students/$documentId');
+  final QuerySnapshot querySnapshot =
+      await documentReference.collection('affiliations').get();
+  for (QueryDocumentSnapshot snapshot in querySnapshot.docs) {
+    await snapshot.reference.delete();
+  }
+  await documentReference.delete();
+
+
+   // Find the user with the email address and delete them from Firebase Authentication
+      User? userToDelete = await FirebaseAuth.instance
+          .fetchSignInMethodsForEmail(email)
+          .then((providers) => FirebaseAuth.instance.signInWithCredential(
+                EmailAuthProvider.credential(email: email, password: password),
+              ).then((userCredential) => userCredential.user));
+
+      if (userToDelete != null) {
+        await userToDelete.delete();
+      }
+
+}
 
 
     Future<void> deleteDocument(String documentId) async {
@@ -25,17 +59,6 @@ class _StudentDetailsState extends State<StudentDetails> {
       // Get the email address from the document
       String email = documentSnapshot.get('email');
       String password = documentSnapshot.get('password');
-
-
-     final DocumentReference documentReference =
-      FirebaseFirestore.instance.doc('students$documentId');
-      final QuerySnapshot querySnapshot =
-          await documentReference.collection('affiliations').get();
-      for (QueryDocumentSnapshot snapshot in querySnapshot.docs) {
-        await snapshot.reference.delete();
-      }
-      await documentReference.delete();
-
 
 
        // Delete the document from Firestore
@@ -191,7 +214,8 @@ class _StudentDetailsState extends State<StudentDetails> {
                         icon: Icon(Icons.delete, color: Color.fromARGB(255, 255, 0, 0),),
                         onPressed: () {
                           // Replace 'documentId' with the ID of the current document
-                          deleteDocument(widget.documentId);
+                          deleteDocuments(widget.documentId);
+                          
                           Navigator.pop(context);
                            ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
