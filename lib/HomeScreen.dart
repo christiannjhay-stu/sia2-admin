@@ -1,4 +1,5 @@
 
+import 'package:admin/Announcement.dart';
 import 'package:admin/CreateStudent.dart';
 import 'package:admin/createAnnouncement.dart';
 import 'package:admin/createClub.dart';
@@ -116,6 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ), 
+                    
                   ],
                 )
               ],
@@ -193,7 +195,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   iconColor: Colors.white,
               )
             ),
-            SizedBox(height: 520),
+             SizedBox(height: 4),
+             ListTileTheme(
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: Color.fromARGB(255, 251, 183, 24)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                leading: Icon(Icons.document_scanner),
+                title: const Text('View Announcements'),
+                  onTap: () {
+                       Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
+                      return FirestoreDataScreen();
+                    }));
+                  },
+                  textColor: Colors.white,
+                  iconColor: Colors.white,
+              )
+            ),
+            SizedBox(height: 400),
             ListTileTheme(
               child: ListTile(
                 shape: RoundedRectangleBorder(
