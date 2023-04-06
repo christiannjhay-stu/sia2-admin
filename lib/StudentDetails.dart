@@ -270,6 +270,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
   final _MotherController = TextEditingController();
    final _RelationshipController = TextEditingController();
     final _ReligionController = TextEditingController();
+    final _RequirementsController = TextEditingController();
 
 
 
@@ -287,6 +288,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
   late String _initialMother;
   late String _initialRelationship;
   late String _initialReligion;
+  late String _initialRequirements;
 
   @override
   void initState() {
@@ -313,6 +315,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
         _MotherController.text = data['mother'];
         _RelationshipController.text = data ['relationship'];
         _ReligionController.text = data ['religion'];
+        _RequirementsController.text = data ['lacking documents'];
       
 
 
@@ -329,9 +332,9 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
       _initialMother = data['mother'];
         _initialRelationship = data['relationship'];
         _initialReligion = data['religion'];
+      _initialRequirements = data['lacking requirements'];
 
-
-        _initialName = data['name'];
+       _initialName = data['name'];
         _initialSubject = data['section'];
       }
     });
@@ -353,10 +356,11 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
         String newMother = _MotherController.text;
         String newRelationship = _RelationshipController.text;
         String newReligion = _ReligionController.text;
+        String newRequirements = _RequirementsController.text;
         // Only update the fields that have changed
         if (newName != _initialName || newSubject != _initialSubject || newLRN != _initialLRN || newMT != _initialMT || newAddress != _initialAddress ||
         newEmail != _initialEmail || newFather != _initialFather || newGender != _initialGender || newGuardian != _initialGuardian || newMother != _initialMother ||
-        newRelationship != _initialRelationship || newReligion != _initialReligion) {
+        newRelationship != _initialRelationship || newReligion != _initialReligion || newRequirements != _RequirementsController) {
           await FirebaseFirestore.instance
               .collection('students')
               .doc(widget.documentId)
@@ -373,6 +377,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
             if (newMother != _initialMother) 'mother': newMother,
             if (newRelationship != _initialRelationship) 'relationship': newRelationship,
             if (newReligion != _initialReligion) 'religion': newReligion,
+          
           });
         }
         Navigator.pop(context); // Navigate back to the previous screen
@@ -616,6 +621,23 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     color: Color.fromARGB(255, 251, 183, 24)
                   ),
                   labelText: 'Section',
+                ),
+                
+              ),
+              TextFormField(
+                style: TextStyle(
+                  color: Colors.white
+                ),
+                controller:_RequirementsController,
+                decoration: InputDecoration(
+                  
+                  labelStyle: TextStyle(
+                    color: Color.fromARGB(255, 251, 183, 24)
+                  ),
+                  labelText: 'Missing Requirements',
+                  hintStyle: TextStyle(
+                    color: Colors.white
+                  )
                 ),
                 
               ),

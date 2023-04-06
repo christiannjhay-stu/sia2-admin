@@ -20,7 +20,7 @@ class _StudentsState extends State<Students> {
             backgroundColor: Color.fromARGB(255, 9, 26, 47),
             title: const Text('Students'),),
             body: StreamBuilder<QuerySnapshot>(
-        stream: _collectionRef.snapshots(),
+        stream: _collectionRef.where('status', isEqualTo: 'Not Enrolled').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
