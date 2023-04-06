@@ -30,6 +30,7 @@ void addDocumentsToSubjectsAndGrades() {
       final CollectionReference collectionRef = FirebaseFirestore.instance.collection('schoolyear');
               collectionRef.doc('SchoolYear').update({
           'yearStarted': Year,
+          'schoolyear':Sy
         });
 
 
