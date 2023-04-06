@@ -17,7 +17,7 @@ class _StudentsState extends State<Students> {
   @override
   void initState() {
     super.initState();
-    _selectedYear = 'ENROLLED'; // set default value for dropdown
+    _selectedYear = 'Enrolled'; // set default value for dropdown
   }
 
    @override
@@ -37,7 +37,7 @@ class _StudentsState extends State<Students> {
                 ),
                  DropdownButton<String>(
                   value: _selectedYear,
-                  items: <String>['ENROLLED', 'NOT ENROLLED']
+                  items: <String>['Enrolled', 'Not Enrolled']
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,

@@ -19,7 +19,7 @@ class _AddSubjectScreenState extends State<AddSubjectScreen> {
     await FirebaseFirestore.instance
         .collection('subjects')
         .add({
-          'name': grade+' - '+subjectName, 
+          'name': grade+'-'+subjectName, 
           });
 
     Navigator.pop(context);
