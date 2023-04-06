@@ -31,7 +31,7 @@ void addDocumentsToSubjectsAndGrades() {
           .doc(doc.id)
           .collection('Subjects')
           .add({
-            'name': 'English',
+            'name': 'MAPEH',
             'Year': Year,
           });
             FirebaseFirestore.instance
@@ -39,7 +39,7 @@ void addDocumentsToSubjectsAndGrades() {
           .doc(doc.id)
           .collection('Subjects')
           .add({
-            'name': 'English',
+            'name': 'SCIENCE',
             'Year': Year,
           });
             FirebaseFirestore.instance
@@ -47,7 +47,7 @@ void addDocumentsToSubjectsAndGrades() {
           .doc(doc.id)
           .collection('Subjects')
           .add({
-            'name': 'English',
+            'name': 'ESP',
             'Year': Year
           });
            FirebaseFirestore.instance
@@ -55,7 +55,47 @@ void addDocumentsToSubjectsAndGrades() {
           .doc(doc.id)
           .collection('Subjects')
           .add({
-            'name': 'English',
+            'name': 'ENGLISH',
+            'Year': Year
+          });
+           FirebaseFirestore.instance
+          .collection('students')
+          .doc(doc.id)
+          .collection('Subjects')
+          .add({
+            'name': 'TLE',
+            'Year': Year
+          });
+           FirebaseFirestore.instance
+          .collection('students')
+          .doc(doc.id)
+          .collection('Subjects')
+          .add({
+            'name': 'MTB',
+            'Year': Year
+          });
+           FirebaseFirestore.instance
+          .collection('students')
+          .doc(doc.id)
+          .collection('Subjects')
+          .add({
+            'name': 'AP',
+            'Year': Year
+          });
+           FirebaseFirestore.instance
+          .collection('students')
+          .doc(doc.id)
+          .collection('Subjects')
+          .add({
+            'name': 'MATH',
+            'Year': Year
+          });
+           FirebaseFirestore.instance
+          .collection('students')
+          .doc(doc.id)
+          .collection('Subjects')
+          .add({
+            'name': 'FILIPINO',
             'Year': Year
           });
       
