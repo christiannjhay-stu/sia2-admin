@@ -317,7 +317,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
   String Status = '';
   late String _selectedEnrollmentStatus = "";
  
-  late String _selectedSubject ='No Section';
+  late String _selectedSubject ='';
   @override
   void initState()  {
     super.initState();
@@ -747,6 +747,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     color: Color.fromARGB(255, 251, 183, 24)
                   ),
                   labelText: 'Add Section',
+                  
                   hintStyle: TextStyle(
                     color: Colors.white
                   )
@@ -757,6 +758,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     _selectedSubject = value!;
                   });
                 },),
+                
               TextFormField(
                 style: TextStyle(
                   color: Colors.white
