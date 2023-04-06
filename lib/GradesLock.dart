@@ -8,6 +8,9 @@ class CheckboxScreen extends StatefulWidget {
 
 class _CheckboxScreenState extends State<CheckboxScreen> {
   late bool _data1 = false;
+  late bool _data2 = false;
+  late bool _data3 = false;
+  late bool _data4 = false;
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -23,12 +26,18 @@ class _CheckboxScreenState extends State<CheckboxScreen> {
     final Map<String, dynamic> data = snapshot.data()!;
     setState(() {
       _data1 = data['data1'];
+      _data2 = data['data2'];
+      _data3 = data['data3'];
+      _data4 = data['data4'];
     });
   }
 
   Future<void> _updateData() async {
     await _firestore.collection('lock').doc('N3P3FO3eYiLe54mJ7MKf').update({
       'data1': _data1,
+      'data2': _data2,
+      'data3': _data3,
+      'data4': _data4,
     });
   }
 
@@ -38,15 +47,50 @@ class _CheckboxScreenState extends State<CheckboxScreen> {
       appBar: AppBar(
         title: Text('Grades Lock'),
       ),
-      body: CheckboxListTile(
-        title: Text('Data 1'),
-        value: _data1,
-        onChanged: (value) {
-          setState(() {
-            _data1 = value!;
-            _updateData();
-          });
-        },
+      body: Column(
+        children: [
+          CheckboxListTile(
+            title: Text('1ST QUARTER',style: TextStyle(color: Colors.white),),
+            value: _data1,
+            onChanged: (value) {
+              setState(() {
+                _data1 = value!;
+                _updateData();
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('2ND QUARTER',style: TextStyle(color: Colors.white),),
+            value: _data2,
+            onChanged: (value) {
+              setState(() {
+                _data2 = value!;
+                _updateData();
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('3RD QUARTER',
+            style: TextStyle(color: Colors.white),),
+            value: _data3,
+            onChanged: (value) {
+              setState(() {
+                _data3 = value!;
+                _updateData();
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('4TH QUARTER',style: TextStyle(color: Colors.white),),
+            value: _data4,
+            onChanged: (value) {
+              setState(() {
+                _data4 = value!;
+                _updateData();
+              });
+            },
+          ),
+        ],
       ),
     );
   }
