@@ -3,6 +3,7 @@ import 'package:admin/Announcement.dart';
 import 'package:admin/CreateStudent.dart';
 import 'package:admin/Enrollment.dart';
 import 'package:admin/TestSchoolYear.dart';
+import 'package:admin/TestSection.dart';
 import 'package:admin/createAnnouncement.dart';
 import 'package:admin/createClub.dart';
 import 'package:admin/students.dart';
@@ -256,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: const Text('Enrollment'),
                   onTap: () {
                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
-                      return Enrollment();
+                      return MyWidget();
                     }));
                   },
                   textColor: Colors.white,
