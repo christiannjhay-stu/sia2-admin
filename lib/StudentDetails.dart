@@ -269,7 +269,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
   
 
   //DROPDOWN MENU FOR STATUS
-  final List<String> _enrollmentStatus = ["ENROLLED", "NOT ENROLLED", ""];
+  final List<String> _enrollmentStatus = ["Enrolled", "Not Enrolled", ""];
 
   
  

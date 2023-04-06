@@ -16,7 +16,7 @@ class _NextSchoolYearState extends State<NextSchoolYear> {
   
 void addDocumentsToSubjectsAndGrades() {
   FirebaseFirestore.instance.collection('students').get().then((querySnapshot) {
-    querySnapshot.docs.forEach((doc) {
+    querySnapshot.docs.forEach((doc) async {
 
       String Year = YearController.text;
       String Sy = SchoolYearController.text;
@@ -103,7 +103,33 @@ void addDocumentsToSubjectsAndGrades() {
             'name': 'FILIPINO',
             'Year': Year
           });
-      
+          //ADD 1 TO THE GRADE
+          final CollectionReference studentsCollection = FirebaseFirestore.instance.collection('students');
+
+          // Get all the documents in the collection
+          final QuerySnapshot snapshot = await studentsCollection.get();
+
+          // Loop through each document and update the age field
+          snapshot.docs.forEach((doc) async {
+            final int age = int.parse(doc['grade']);
+            final int newAge = age + 1;
+            final String newAgeString = newAge.toString();
+
+            await studentsCollection.doc(doc.id).update({'grade': newAgeString});
+          });
+
+
+          //UNENROLL
+          CollectionReference studentsRef = FirebaseFirestore.instance.collection('students');
+
+          // Update all documents in the collection
+          studentsRef.get().then((querySnapshot) {
+            querySnapshot.docs.forEach((document) {
+              document.reference.update({'status': 'Not Enrolled'});
+            });
+          });
+
+
       // Add documents to 'Grades' collection in each subject
       FirebaseFirestore.instance
           .collection('students')
