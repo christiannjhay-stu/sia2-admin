@@ -118,6 +118,7 @@ void addDocumentsToSubjectsAndGrades() {
                     'Grade2': '',
                     'Grade3': '',
                     'Grade4': '',
+                    'Year': Year
                   });
             });
           });
