@@ -13,14 +13,55 @@ class Students extends StatefulWidget {
 
 class _StudentsState extends State<Students> {
   final CollectionReference _collectionRef = FirebaseFirestore.instance.collection('students');
+  late String _selectedYear;
+  @override
+  void initState() {
+    super.initState();
+    _selectedYear = 'ENROLLED'; // set default value for dropdown
+  }
+
    @override
    Widget build(BuildContext context) {
        return Scaffold(
            appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 9, 26, 47),
             title: const Text('Students'),),
-            body: StreamBuilder<QuerySnapshot>(
-        stream: _collectionRef.snapshots(),
+            body: Column(
+              children: [
+                Padding(
+            padding: EdgeInsets.only(top: 10,left: 20),
+            child: Row(
+              children: <Widget>[
+                Container(
+                    child: Text('Year'),
+                ),
+                 DropdownButton<String>(
+                  value: _selectedYear,
+                  items: <String>['ENROLLED', 'NOT ENROLLED']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value,
+                      style: TextStyle(
+                        color: Colors.amberAccent
+                      ),),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedYear = newValue!;
+                    });
+                  },
+                ),
+                
+              ],
+              
+            ),
+            
+            
+          ),
+          Expanded(child: StreamBuilder<QuerySnapshot>(
+        stream: _collectionRef.where('status', isEqualTo: _selectedYear).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
@@ -30,6 +71,7 @@ class _StudentsState extends State<Students> {
             return Center(child: Text('No data found'));
           }
           return ListView.builder(
+            padding: EdgeInsets.only(top: 50),
             itemCount: documents.length,
             itemBuilder: (BuildContext context, int index) {
               final data = documents[index].data();
@@ -91,7 +133,12 @@ class _StudentsState extends State<Students> {
             },
           );
         },
-      ),
+      ),)
+
+
+
+              ],
+            )
        );
   }
 }
