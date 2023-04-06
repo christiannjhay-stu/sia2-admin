@@ -194,7 +194,20 @@ Future<void> deleteDocuments(String documentId) async {
                      Text('Religion', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
                     Text(data['religion'], style: TextStyle(
                       color: Colors.white
-                    ), ),
+                    ), 
+                    ),
+                     SizedBox(height: 10,),
+                     Text('Lacking Documents', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['lacking documents'], style: TextStyle(
+                      color: Colors.white
+                    ), 
+                    ),
+                     SizedBox(height: 10,),
+                     Text('Status', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
+                    Text(data['status'], style: TextStyle(
+                      color: Colors.white
+                    ), 
+                    ),
                   ],
                 ),
                 ),
@@ -254,8 +267,12 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
   final _formKey = GlobalKey<FormState>();
 
 
+  //DROPDOWN MENU FOR STATUS
+  final List<String> _enrollmentStatus = ["ENROLLED", "NOT ENROLLED", ""];
 
-
+  
+ 
+  
 
   final _nameController = TextEditingController();
   final _subjectController = TextEditingController();
@@ -271,28 +288,63 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
    final _RelationshipController = TextEditingController();
     final _ReligionController = TextEditingController();
     final _RequirementsController = TextEditingController();
+    final GradeController = TextEditingController();
+      final StatusController = TextEditingController();
 
 
 
+  late String _initialName ='';
+  late String _initialSubject='';
+  late String _initialLRN='';
+  late String _initialMT='';
+  late String _initialBirthday='';
+  late String _initialAddress='';
+  late String _initialEmail='';
+  late String _initialFather='';
+  late String _initialGender='';
+  late String _initialGuardian='';
+  late String _initialMother='';
+  late String _initialRelationship='';
+  late String _initialReligion='';
+  late String _initialRequirements='';
+  late String _initialGrade='';
+  late String _initialStatus='';
 
-  late String _initialName;
-  late String _initialSubject;
-  late String _initialLRN;
-  late String _initialMT;
-  late String _initialBirthday;
-  late String _initialAddress;
-  late String _initialEmail;
-  late String _initialFather;
-  late String _initialGender;
-  late String _initialGuardian;
-  late String _initialMother;
-  late String _initialRelationship;
-  late String _initialReligion;
-  late String _initialRequirements;
+   late TextEditingController controller;
+
+
+  String Status = '';
+  late String _selectedEnrollmentStatus = "";
 
   @override
-  void initState() {
+  void initState()  {
     super.initState();
+    controller = TextEditingController();
+
+    Future<void> _getData() async {
+    try {
+      final DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+          .collection('schoolyear')
+          .doc('SchoolYear')
+          .get();
+      final String Status = documentSnapshot.get('yearStarted');
+      setState(() {
+        this.Status = Status;
+      });
+    } catch (e) {
+      print('Error retrieving data: $e');
+    }
+  } 
+
+
+
+
+
+
+
+
+
+
     // Retrieve the current teacher data and populate the text fields
     FirebaseFirestore.instance
         .collection('students')
@@ -316,6 +368,8 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
         _RelationshipController.text = data ['relationship'];
         _ReligionController.text = data ['religion'];
         _RequirementsController.text = data ['lacking documents'];
+        GradeController.text = data ['grade'];
+        StatusController.text = data ['status'];
       
 
 
@@ -336,6 +390,8 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
 
        _initialName = data['name'];
         _initialSubject = data['section'];
+        _initialGrade = data['grade'];
+        _initialStatus = data['status'];
       }
     });
   }
@@ -357,16 +413,20 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
         String newRelationship = _RelationshipController.text;
         String newReligion = _ReligionController.text;
         String newRequirements = _RequirementsController.text;
+        String newGrade = GradeController.text;
+        String newStatus = _selectedEnrollmentStatus;
         // Only update the fields that have changed
         if (newName != _initialName || newSubject != _initialSubject || newLRN != _initialLRN || newMT != _initialMT || newAddress != _initialAddress ||
         newEmail != _initialEmail || newFather != _initialFather || newGender != _initialGender || newGuardian != _initialGuardian || newMother != _initialMother ||
-        newRelationship != _initialRelationship || newReligion != _initialReligion || newRequirements != _RequirementsController) {
+        newRelationship != _initialRelationship || newReligion != _initialReligion || newRequirements != _RequirementsController || newGrade  != _initialGrade 
+        || newStatus != _initialStatus) {
           await FirebaseFirestore.instance
               .collection('students')
               .doc(widget.documentId)
               .update({
             if (newName != _initialName) 'name': newName,
-            if (newSubject != _initialSubject) 'section': newSubject,
+            if (newName != _initialName) 'name': newName,
+ 		        if (newSubject != _initialSubject) 'section': newSubject,
             if (newLRN != _initialLRN) 'LRN': newLRN,
             if (newMT != _initialMT) 'MT': newMT,
             if (newAddress != _initialAddress) 'address': newAddress,
@@ -377,6 +437,10 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
             if (newMother != _initialMother) 'mother': newMother,
             if (newRelationship != _initialRelationship) 'relationship': newRelationship,
             if (newReligion != _initialReligion) 'religion': newReligion,
+            if (newRequirements != _RequirementsController) 'lacking documents': newRequirements,
+            if (newGrade  != _initialGrade) 'grade': newGrade,
+            if (newStatus != _initialStatus) 'status': newStatus,
+            
           
           });
         }
@@ -387,6 +451,10 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
     }
   }
 
+  
+ 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -394,7 +462,10 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
         backgroundColor: Color.fromARGB(255, 9, 26, 47),
         title: Text('Edit Student'),
       ),
-      body: Padding(
+      body: ListView(
+        children: <Widget>[
+          
+      Padding(
         padding: EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
@@ -422,6 +493,23 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                   }
                   return null;
                 },
+              ),
+                TextFormField(
+                style: TextStyle(
+                  color: Colors.white
+                ),
+                controller: GradeController,
+                decoration: InputDecoration(
+                  
+                  labelStyle: TextStyle(
+                    color: Color.fromARGB(255, 251, 183, 24)
+                  ),
+                  labelText: 'Grade',
+                  hintStyle: TextStyle(
+                    color: Colors.white
+                  )
+                ),
+              
               ),
                 TextFormField(
                 style: TextStyle(
@@ -641,6 +729,54 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                 ),
                 
               ),
+               TextFormField(
+                enabled: false,
+                style: TextStyle(
+                  color: Colors.white
+                ),
+                controller:StatusController,
+                decoration: InputDecoration(
+                  
+                  labelStyle: TextStyle(
+                    color: Color.fromARGB(255, 251, 183, 24)
+                  ),
+                  labelText: 'Status',
+                  hintStyle: TextStyle(
+                    color: Colors.white
+                  )
+                ),
+                
+              ),
+              
+          DropdownButtonFormField<String>(
+            value: _selectedEnrollmentStatus,
+            onChanged: (newValue) {
+              setState(() {
+                _selectedEnrollmentStatus = newValue!;
+              });
+            },
+            items: _enrollmentStatus.map((status) {
+              return DropdownMenuItem(
+                value: status,
+                child: Text(status,
+                style: TextStyle(
+                  color: Colors.white
+                ),),
+              );
+            }).toList(),
+           decoration: InputDecoration(
+                  
+                  labelStyle: TextStyle(
+                    color: Color.fromARGB(255, 251, 183, 24)
+                  ),
+                  labelText: 'Update Status',
+                  hintStyle: TextStyle(
+                    color: Colors.white
+                  )
+                ),
+                dropdownColor: Colors.grey[800], 
+          ),
+         
               SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: (() {
@@ -661,6 +797,10 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
           ),
         ),
       ),
+        ],
+      )
+      
+      
     );
   }
 }
