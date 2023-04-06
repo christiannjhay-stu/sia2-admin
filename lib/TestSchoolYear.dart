@@ -24,7 +24,15 @@ void addDocumentsToSubjectsAndGrades() {
 
       String Year = YearController.text;
       String Sy = SchoolYearController.text;
-       
+      
+
+
+      final CollectionReference collectionRef = FirebaseFirestore.instance.collection('schoolyear');
+              collectionRef.doc('SchoolYear').update({
+          'yearStarted': Year,
+        });
+
+
       // Add documents to 'Subjects' subcollection
       FirebaseFirestore.instance
           .collection('students')
