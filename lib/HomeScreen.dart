@@ -3,6 +3,7 @@ import 'package:admin/Announcement.dart';
 import 'package:admin/CreateStudent.dart';
 import 'package:admin/CreateSubjects.dart';
 import 'package:admin/Enrollment.dart';
+import 'package:admin/GradesLock.dart';
 import 'package:admin/TestSchoolYear.dart';
 import 'package:admin/TestSection.dart';
 import 'package:admin/createAnnouncement.dart';
@@ -289,6 +290,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
                       return MyWidget();
+                    }));
+                  },
+                  textColor: Colors.white,
+                  iconColor: Colors.white,
+              )
+            ),
+            SizedBox(height: 4),
+             ListTileTheme(
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: Color.fromARGB(255, 251, 183, 24)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                leading: Icon(Icons.document_scanner),
+                title: const Text('Grades Lock'),
+                  onTap: () {
+                       Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
+                      return CheckboxScreen();
                     }));
                   },
                   textColor: Colors.white,
