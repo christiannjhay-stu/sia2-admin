@@ -200,8 +200,9 @@ class EditTeacherScreen extends StatefulWidget {
 }
 
 class _EditTeacherScreenState extends State<EditTeacherScreen> {
-
+late String _selectedSubject ='';
   DateTime? _selectedDate;
+  List<String> _subjects = [];
 
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
@@ -230,6 +231,10 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
   @override
   void initState() {
     super.initState();
+    _getSubjects();
+
+
+    
     // Retrieve the current teacher data and populate the text fields
     FirebaseFirestore.instance
         .collection('teachers')
@@ -264,7 +269,22 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
       }
     });
   }
-
+  void _getSubjects() async {
+     final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final snapshot = await firestore.collection('subjects').get();
+    final List<String> subjects = [];
+  
+    snapshot.docs.forEach((doc) {
+      final subject = doc.get('name');
+      
+      subjects.add(subject);
+    
+    });
+    setState(() {
+      _subjects = subjects;
+    });
+  }
+  
   
   Future<void> _selectDate(BuildContext context) async {
   final DateTime? picked = await showDatePicker(
@@ -306,15 +326,17 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
         String newBirthday = _BirthdayController.text;
         String newMT = _MTController.text;
         String newReligion = _ReligionController.text;
+         String newSection = _selectedSubject;
         // Only update the fields that have changed
         if (newName != _initialName || newSubject != _initialSubject || newGrade != _initialGrade || newAddress != _initialAddress
-        || newContact != _initialContact || newGender != _initialGender  || newBirthday != _initialBirthday || newMT != _initialMT || newReligion != _initialReligion) {
+        || newContact != _initialContact || newGender != _initialGender  || newBirthday != _initialBirthday || newMT != _initialMT || newReligion != _initialReligion 
+        || newSection != _initialSubject) {
           await FirebaseFirestore.instance
               .collection('teachers')
               .doc(widget.documentId)
               .update({
             if (newName != _initialName) 'name': newName,
-            if (newSubject != _initialSubject) 'section': newSubject,
+            if (newSection != _initialSubject) 'section': newSection,
             if (newGrade != _initialGrade) 'grade': newGrade,
             if (newAddress != _initialAddress) 'address': newAddress,
             if (newContact != _initialContact) 'contact': newContact,
@@ -403,6 +425,34 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                 ),
                
               ),
+              DropdownButtonFormField<String>(
+              value: _selectedSubject,
+              items: _subjects.map((subject) {
+                return DropdownMenuItem<String>(
+                  value: subject,
+                  child: Text(subject, style: TextStyle(
+                    color: Color.fromARGB(255, 251, 183, 24) 
+                  ),),
+                );
+              }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  _selectedSubject = value!;
+                });
+              },
+              decoration: InputDecoration(
+                  
+                  labelStyle: TextStyle(
+                    color: Color.fromARGB(255, 251, 183, 24)
+                  ),
+                  labelText: 'Assign Section',
+                  
+                  hintStyle: TextStyle(
+                    color: Colors.white
+                  )
+                ),
+                dropdownColor: Colors.grey[800], 
+            ),
               TextFormField(
                
                 style: TextStyle(

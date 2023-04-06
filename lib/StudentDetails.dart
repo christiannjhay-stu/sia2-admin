@@ -738,7 +738,9 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                     value: subject,
                     child: Text(subject,
                     style: TextStyle(
-                      color: Colors.white
+                     
+                    color: Color.fromARGB(255, 251, 183, 24) 
+                
                     ),),
                   );
                 }).toList(), decoration: InputDecoration(
@@ -749,7 +751,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                   labelText: 'Add Section',
                   
                   hintStyle: TextStyle(
-                    color: Colors.white
+                    color: Color.fromARGB(255, 251, 183, 24)
                   )
                 ),
                   dropdownColor: Colors.grey[800], 
@@ -807,8 +809,10 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                 value: status,
                 child: Text(status,
                 style: TextStyle(
-                  color: Colors.white
-                ),),
+                     
+                    color: Color.fromARGB(255, 251, 183, 24) 
+                
+                    ),),
               );
             }).toList(),
            decoration: InputDecoration(
@@ -829,7 +833,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                 onPressed: (() {
                   _updateTeacher();
 
-                  
+                  print(_selectedSubject);
                   ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               backgroundColor: Color.fromARGB(255, 37, 129, 60), // set the background color
