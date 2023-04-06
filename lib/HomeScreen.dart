@@ -1,6 +1,7 @@
 
 import 'package:admin/Announcement.dart';
 import 'package:admin/CreateStudent.dart';
+import 'package:admin/CreateSubjects.dart';
 import 'package:admin/Enrollment.dart';
 import 'package:admin/TestSchoolYear.dart';
 import 'package:admin/TestSection.dart';
@@ -111,6 +112,36 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         child: Text(
                           'Create Teacher',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: "Noopla"
+                          ),
+
+                        ),
+                      ),
+                    ), 
+                       Container(
+                      width: 340,
+                      height: 60,
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: TextButton(
+                        onPressed: () {
+                           Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                            return AddSubjectScreen();
+                          }));
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll < Color > (Color.fromARGB(255, 251, 183, 24)),
+                          shape: MaterialStateProperty.all < RoundedRectangleBorder > (
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+
+                            )
+                          )
+                        ),
+                        child: Text(
+                          'Create Subject',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,

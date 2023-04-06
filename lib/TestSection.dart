@@ -23,7 +23,7 @@ class _MyWidgetState extends State<MyWidget> {
   
     snapshot.docs.forEach((doc) {
       final subject = doc.get('name');
-      final grade = doc.get('grade');
+      
       subjects.add(subject);
     
     });

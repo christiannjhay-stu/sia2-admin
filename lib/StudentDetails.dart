@@ -265,7 +265,8 @@ class EditTeacherScreen extends StatefulWidget {
 
 class _EditTeacherScreenState extends State<EditTeacherScreen> {
   final _formKey = GlobalKey<FormState>();
-
+  List<String> _subjects = [];
+  
 
   //DROPDOWN MENU FOR STATUS
   final List<String> _enrollmentStatus = ["ENROLLED", "NOT ENROLLED", ""];
@@ -315,10 +316,12 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
 
   String Status = '';
   late String _selectedEnrollmentStatus = "";
-
+ 
+  late String _selectedSubject ='No Section';
   @override
   void initState()  {
     super.initState();
+    _getSubjects();
     controller = TextEditingController();
 
     Future<void> _getData() async {
@@ -396,6 +399,21 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
     });
   }
 
+   void _getSubjects() async {
+     final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final snapshot = await firestore.collection('subjects').get();
+    final List<String> subjects = [];
+  
+    snapshot.docs.forEach((doc) {
+      final subject = doc.get('name');
+      
+      subjects.add(subject);
+    
+    });
+    setState(() {
+      _subjects = subjects;
+    });
+  }
   Future<void> _updateTeacher() async {
     if (_formKey.currentState!.validate()) {
       try {
@@ -415,18 +433,19 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
         String newRequirements = _RequirementsController.text;
         String newGrade = GradeController.text;
         String newStatus = _selectedEnrollmentStatus;
+        String newSection = _selectedSubject;
         // Only update the fields that have changed
         if (newName != _initialName || newSubject != _initialSubject || newLRN != _initialLRN || newMT != _initialMT || newAddress != _initialAddress ||
         newEmail != _initialEmail || newFather != _initialFather || newGender != _initialGender || newGuardian != _initialGuardian || newMother != _initialMother ||
         newRelationship != _initialRelationship || newReligion != _initialReligion || newRequirements != _RequirementsController || newGrade  != _initialGrade 
-        || newStatus != _initialStatus) {
+        || newStatus != _initialStatus || newSection != _initialSubject) {
           await FirebaseFirestore.instance
               .collection('students')
               .doc(widget.documentId)
               .update({
             if (newName != _initialName) 'name': newName,
             if (newName != _initialName) 'name': newName,
- 		        if (newSubject != _initialSubject) 'section': newSubject,
+ 		        if (newSection != _initialSubject) 'section': newSection,
             if (newLRN != _initialLRN) 'LRN': newLRN,
             if (newMT != _initialMT) 'MT': newMT,
             if (newAddress != _initialAddress) 'address': newAddress,
@@ -700,6 +719,7 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                 
               ),
               TextFormField(
+                enabled: false,
                 style: TextStyle(
                   color: Colors.white
                 ),
@@ -711,7 +731,32 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                   labelText: 'Section',
                 ),
                 
-              ),
+              ),DropdownButtonFormField<String>(
+                value: _selectedSubject,
+                items: _subjects.map((subject) {
+                  return DropdownMenuItem<String>(
+                    value: subject,
+                    child: Text(subject,
+                    style: TextStyle(
+                      color: Colors.white
+                    ),),
+                  );
+                }).toList(), decoration: InputDecoration(
+                  
+                  labelStyle: TextStyle(
+                    color: Color.fromARGB(255, 251, 183, 24)
+                  ),
+                  labelText: 'Add Section',
+                  hintStyle: TextStyle(
+                    color: Colors.white
+                  )
+                ),
+                  dropdownColor: Colors.grey[800], 
+                onChanged: (value) {
+                  setState(() {
+                    _selectedSubject = value!;
+                  });
+                },),
               TextFormField(
                 style: TextStyle(
                   color: Colors.white
