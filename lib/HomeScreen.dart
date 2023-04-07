@@ -6,6 +6,7 @@ import 'package:admin/Enrollment.dart';
 import 'package:admin/GradesLock.dart';
 import 'package:admin/TestSchoolYear.dart';
 import 'package:admin/TestSection.dart';
+import 'package:admin/ViewSection.dart';
 import 'package:admin/createAnnouncement.dart';
 import 'package:admin/createClub.dart';
 import 'package:admin/students.dart';
@@ -289,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: const Text('View By Section'),
                   onTap: () {
                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
-                      return FirestoreDataScreen();
+                      return ViewSection();
                     }));
                   },
                   textColor: Colors.white,
@@ -307,7 +308,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: const Text('Enrollment'),
                   onTap: () {
                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
-                      return MyWidget();
+                      return Enrollment();
                     }));
                   },
                   textColor: Colors.white,

@@ -125,7 +125,11 @@ void addDocumentsToSubjectsAndGrades() {
           // Update all documents in the collection
           studentsRef.get().then((querySnapshot) {
             querySnapshot.docs.forEach((document) {
-              document.reference.update({'status': 'Not Enrolled'});
+              document.reference.update({
+                'status': 'Not Enrolled',
+                'section': ''
+                
+                });
             });
           });
 
@@ -149,6 +153,7 @@ void addDocumentsToSubjectsAndGrades() {
                     'Grade2': '',
                     'Grade3': '',
                     'Grade4': '',
+                    'Final': '',
                     'Year': Year
                   });
             });

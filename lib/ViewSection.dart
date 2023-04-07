@@ -3,23 +3,41 @@ import 'package:admin/details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Enrollment extends StatefulWidget {
+class ViewSection extends StatefulWidget {
 
-  const Enrollment({ Key? key }) : super(key: key);
+  const ViewSection({ Key? key }) : super(key: key);
 
   @override
-  State<Enrollment> createState() => EnrollmentState();
+  State<ViewSection> createState() => ViewSectionState();
 }
 
-class EnrollmentState extends State<Enrollment> {
+class ViewSectionState extends State<ViewSection> {
   final CollectionReference _collectionRef = FirebaseFirestore.instance.collection('students');
-  late String _selectedYear;
+  List<String> _sections = [];
+  String _selectedSection = '';
+  
   @override
   void initState() {
     super.initState();
-    _selectedYear = '1'; // set default value for dropdown
+    _getSections();
   }
+  
+  void _getSections() async {
+   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final snapshot = await firestore.collection('subjects').get();
+    final List<String> subjects = [];
 
+    snapshot.docs.forEach((doc) {
+      final subject = doc.get('name');
+      subjects.add(subject);
+    });
+        
+        setState(() {
+          _sections = subjects;
+          _selectedSection = subjects.isNotEmpty ? subjects.first : '';
+        });
+      }
+  
    @override
    Widget build(BuildContext context) {
        return Scaffold(
@@ -36,8 +54,8 @@ class EnrollmentState extends State<Enrollment> {
                     child: Text('Year'),
                 ),
                  DropdownButton<String>(
-                  value: _selectedYear,
-                  items: <String>['1','2','3','4','5','6']
+                  value: _selectedSection,
+                  items: _sections
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -49,7 +67,7 @@ class EnrollmentState extends State<Enrollment> {
                   }).toList(),
                   onChanged: (String? newValue) {
                     setState(() {
-                      _selectedYear = newValue!;
+                      _selectedSection = newValue!;
                     });
                   },
                   dropdownColor: Colors.grey[800],
@@ -62,7 +80,7 @@ class EnrollmentState extends State<Enrollment> {
             
           ),
           Expanded(child: StreamBuilder<QuerySnapshot>(
-        stream: _collectionRef.where('grade', isEqualTo: _selectedYear).where('status', isEqualTo: 'Not Enrolled').snapshots(),
+        stream: _collectionRef.where('section', isEqualTo: _selectedSection).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
