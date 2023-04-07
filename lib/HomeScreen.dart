@@ -250,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 leading: Icon(Icons.document_scanner),
-                title: const Text('View Students'),
+                title: const Text('View All Students'),
                   onTap: () {
                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
                       return Students();
@@ -269,6 +269,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 leading: Icon(Icons.document_scanner),
                 title: const Text('View Announcements'),
+                  onTap: () {
+                       Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
+                      return FirestoreDataScreen();
+                    }));
+                  },
+                  textColor: Colors.white,
+                  iconColor: Colors.white,
+              )
+            ),
+             SizedBox(height: 4),
+             ListTileTheme(
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: Color.fromARGB(255, 251, 183, 24)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                leading: Icon(Icons.document_scanner),
+                title: const Text('View By Section'),
                   onTap: () {
                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
                       return FirestoreDataScreen();
@@ -314,7 +332,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   iconColor: Colors.white,
               )
             ),
-            SizedBox(height: 400),
+             SizedBox(height: 4),
+             ListTileTheme(
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: Color.fromARGB(255, 251, 183, 24)),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                leading: Icon(Icons.document_scanner),
+                title: const Text('Delete Section'),
+                  onTap: () {
+                       Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
+                      return CheckboxScreen();
+                    }));
+                  },
+                  textColor: Colors.white,
+                  iconColor: Colors.white,
+              )
+            ),
+            SizedBox(height: 200),
             ListTileTheme(
               child: ListTile(
                 shape: RoundedRectangleBorder(
