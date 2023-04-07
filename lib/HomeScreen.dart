@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           )
                         ),
                         child: Text(
-                          'Create Subject',
+                          'Create Section',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
