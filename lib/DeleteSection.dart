@@ -14,7 +14,7 @@ class _ViewSubjectsState extends State<ViewSubjects> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Subjects'),
+        title: Text('Delete Section'),
         actions: [
           IconButton(
             icon: Icon(Icons.add),
