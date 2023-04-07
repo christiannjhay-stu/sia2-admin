@@ -2,6 +2,7 @@
 import 'package:admin/Announcement.dart';
 import 'package:admin/CreateStudent.dart';
 import 'package:admin/CreateSubjects.dart';
+import 'package:admin/DeleteSection.dart';
 import 'package:admin/Enrollment.dart';
 import 'package:admin/GradesLock.dart';
 import 'package:admin/TestSchoolYear.dart';
@@ -143,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           )
                         ),
                         child: Text(
-                          'Create Section',
+                          'Create Sectio',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -344,7 +345,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: const Text('Delete Section'),
                   onTap: () {
                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
-                      return CheckboxScreen();
+                      return ViewSubjects();
                     }));
                   },
                   textColor: Colors.white,
