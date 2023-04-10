@@ -5,7 +5,7 @@ import 'package:admin/CreateSubjects.dart';
 import 'package:admin/DeleteSection.dart';
 import 'package:admin/Enrollment.dart';
 import 'package:admin/GradesLock.dart';
-import 'package:admin/TestSchoolYear.dart';
+import 'package:admin/NewSchoolYear.dart';
 import 'package:admin/TestSection.dart';
 import 'package:admin/ViewSection.dart';
 import 'package:admin/createAnnouncement.dart';
@@ -144,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           )
                         ),
                         child: Text(
-                          'Create Sectio',
+                          'Create Section',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,

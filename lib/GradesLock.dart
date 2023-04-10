@@ -47,13 +47,15 @@ class _CheckboxScreenState extends State<CheckboxScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 9, 26, 47),
         title: Text('Grades Lock'),
       ),
       body: Column(
         children: [
           CheckboxListTile(
-            title: Text('1ST QUARTER',style: TextStyle(color: Colors.white),),
+            title: Text('1ST QUARTER',style: TextStyle(color: Color.fromARGB(246, 255, 208, 0)),),
             value: _data1,
+            activeColor: Color.fromARGB(246, 255, 208, 0),
             onChanged: (value) {
               setState(() {
                 _data1 = value!;
@@ -62,8 +64,9 @@ class _CheckboxScreenState extends State<CheckboxScreen> {
             },
           ),
           CheckboxListTile(
-            title: Text('2ND QUARTER',style: TextStyle(color: Colors.white),),
+            title: Text('2ND QUARTER',style: TextStyle(color: Color.fromARGB(246, 255, 208, 0)),),
             value: _data2,
+            activeColor: Color.fromARGB(246, 255, 208, 0),
             onChanged: (value) {
               setState(() {
                 _data2 = value!;
@@ -73,8 +76,9 @@ class _CheckboxScreenState extends State<CheckboxScreen> {
           ),
           CheckboxListTile(
             title: Text('3RD QUARTER',
-            style: TextStyle(color: Colors.white),),
+            style: TextStyle(color: Color.fromARGB(246, 255, 208, 0)),),
             value: _data3,
+            activeColor: Color.fromARGB(246, 255, 208, 0),
             onChanged: (value) {
               setState(() {
                 _data3 = value!;
@@ -83,8 +87,9 @@ class _CheckboxScreenState extends State<CheckboxScreen> {
             },
           ),
           CheckboxListTile(
-            title: Text('4TH QUARTER',style: TextStyle(color: Colors.white),),
+            title: Text('4TH QUARTER',style: TextStyle(color: Color.fromARGB(246, 255, 208, 0)),),
             value: _data4,
+            activeColor: Color.fromARGB(246, 255, 208, 0),
             onChanged: (value) {
               setState(() {
                 _data4 = value!;
@@ -93,8 +98,9 @@ class _CheckboxScreenState extends State<CheckboxScreen> {
             },
           ),
           CheckboxListTile(
-            title: Text('FINAL GRADE',style: TextStyle(color: Colors.white),),
+            title: Text('FINAL GRADE',style: TextStyle(color: Color.fromARGB(246, 255, 208, 0)),),
             value: _data5,
+            activeColor: Color.fromARGB(246, 255, 208, 0),
             onChanged: (value) {
               setState(() {
                 _data5 = value!;

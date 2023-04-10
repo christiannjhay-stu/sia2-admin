@@ -25,7 +25,7 @@ class EnrollmentState extends State<Enrollment> {
        return Scaffold(
            appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 9, 26, 47),
-            title: const Text('Students'),),
+            title: const Text('Enrollment'),),
             body: Column(
               children: [
                 Padding(
@@ -33,7 +33,11 @@ class EnrollmentState extends State<Enrollment> {
             child: Row(
               children: <Widget>[
                 Container(
-                    child: Text('Year'),
+                  padding: EdgeInsets.only(right: 10),
+                    child: Text('Grade', style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16
+                    ),),
                 ),
                  DropdownButton<String>(
                   value: _selectedYear,
@@ -72,7 +76,7 @@ class EnrollmentState extends State<Enrollment> {
             return Center(child: Text('No data found'));
           }
           return ListView.builder(
-            padding: EdgeInsets.only(top: 50),
+            padding: EdgeInsets.only(top: 10),
             itemCount: documents.length,
             itemBuilder: (BuildContext context, int index) {
               final data = documents[index].data();
@@ -104,6 +108,7 @@ class EnrollmentState extends State<Enrollment> {
                 color: Color.fromARGB(255, 9, 26, 47).withOpacity(0.2),
                   child: ListTile(
                   leading: CircleAvatar(
+                     child: Icon(Icons.person),
                   radius: 30,
                  
                 ),

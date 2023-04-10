@@ -61,7 +61,7 @@ class _TeachersState extends State<Teachers> {
                 color: Color.fromARGB(255, 9, 26, 47).withOpacity(0.2),
                   child: ListTile(
                   leading: CircleAvatar(
-                    
+                    child: Icon(Icons.person),
                   radius: 30,
                  
                 ),

@@ -33,7 +33,11 @@ class _StudentsState extends State<Students> {
             child: Row(
               children: <Widget>[
                 Container(
-                    child: Text('Year'),
+                  padding: EdgeInsets.only(right: 10),
+                    child: Text('Status', style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18
+                    ),),
                 ),
                  DropdownButton<String>(
                   value: _selectedYear,
@@ -72,7 +76,7 @@ class _StudentsState extends State<Students> {
             return Center(child: Text('No data found'));
           }
           return ListView.builder(
-            padding: EdgeInsets.only(top: 50),
+            padding: EdgeInsets.only(top: 10),
             itemCount: documents.length,
             itemBuilder: (BuildContext context, int index) {
               final data = documents[index].data();
@@ -104,6 +108,7 @@ class _StudentsState extends State<Students> {
                 color: Color.fromARGB(255, 9, 26, 47).withOpacity(0.2),
                   child: ListTile(
                   leading: CircleAvatar(
+                     child: Icon(Icons.person),
                   radius: 30,
                  
                 ),

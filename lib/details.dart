@@ -94,6 +94,7 @@ class _DetailsState extends State<Details> {
                 ),), 
                 ),
                   subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                     SizedBox(height: 10,),
                     Text('Email', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
@@ -540,6 +541,7 @@ late String _selectedSubject ='';
               ),
               SizedBox(height: 16.0),
                ElevatedButton(
+                
                 onPressed: () {
                   _updateTeacher();
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -550,6 +552,9 @@ late String _selectedSubject ='';
                   ),
                   );
                 },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 251, 183, 24))
+                ),
                 child: Text('Update'),
               ),
             ],

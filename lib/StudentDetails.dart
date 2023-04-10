@@ -114,12 +114,16 @@ Future<void> deleteDocuments(String documentId) async {
           final data = snapshot.data!.data() as Map<String, dynamic>;
 
           return Card(
+            
             color: Color.fromARGB(255, 9, 26, 47).withOpacity(0.2),
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              
               children: <Widget>[
                 ListTile(
-                  title: Center(
+                  
+                  title: Container(
                   child:Text(data['name'],
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -128,6 +132,7 @@ Future<void> deleteDocuments(String documentId) async {
                 ),), 
                 ),
                 subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                      SizedBox(height: 10,),
                     Text('Grade', style: TextStyle(color: Color.fromARGB(255, 251, 183, 24), fontWeight: FontWeight.bold ),),
@@ -211,7 +216,12 @@ Future<void> deleteDocuments(String documentId) async {
                   ],
                 ),
                 ),
-               new IconButton(
+              
+                 Builder(
+                  
+                    builder: (BuildContext context) {
+                    
+                      return IconButton(
                         icon: Icon(Icons.edit,
                         color: Color.fromARGB(255, 255, 251, 0),),
                         onPressed: () {
@@ -221,10 +231,12 @@ Future<void> deleteDocuments(String documentId) async {
                           }));
                           
                         },
-                      ),
-
+                      );
+                    },
+                  ),
                 Builder(
                     builder: (BuildContext context) {
+                      
                       return IconButton(
                         icon: Icon(Icons.delete, color: Color.fromARGB(255, 255, 0, 0),),
                         onPressed: () {
@@ -240,9 +252,12 @@ Future<void> deleteDocuments(String documentId) async {
                             ),
                           ); 
                         },
+                        
                       );
                     },
                   ),
+                    
+                  
               ],
             ),
           );
@@ -842,6 +857,9 @@ class _EditTeacherScreenState extends State<EditTeacherScreen> {
                             ),
                           ); 
                 }) , 
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(246, 255, 208, 0))
+                ),
                 child: Text('Update'),
               ),
             ],

@@ -43,7 +43,7 @@ class ViewSectionState extends State<ViewSection> {
        return Scaffold(
            appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 9, 26, 47),
-            title: const Text('Students'),),
+            title: const Text('View by Section'),),
             body: Column(
               children: [
                 Padding(
@@ -51,7 +51,11 @@ class ViewSectionState extends State<ViewSection> {
             child: Row(
               children: <Widget>[
                 Container(
-                    child: Text('Year'),
+                  padding: EdgeInsets.only(right: 20),
+                    child: Text('Section', style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16
+                    ),),
                 ),
                  DropdownButton<String>(
                   value: _selectedSection,
@@ -90,7 +94,7 @@ class ViewSectionState extends State<ViewSection> {
             return Center(child: Text('No data found'));
           }
           return ListView.builder(
-            padding: EdgeInsets.only(top: 50),
+            padding: EdgeInsets.only(top: 10),
             itemCount: documents.length,
             itemBuilder: (BuildContext context, int index) {
               final data = documents[index].data();
@@ -122,6 +126,7 @@ class ViewSectionState extends State<ViewSection> {
                 color: Color.fromARGB(255, 9, 26, 47).withOpacity(0.2),
                   child: ListTile(
                   leading: CircleAvatar(
+                     child: Icon(Icons.person),
                   radius: 30,
                  
                 ),

@@ -14,6 +14,8 @@ class _ViewSubjectsState extends State<ViewSubjects> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 9, 26, 47)
+,
         title: Text('Delete Section'),
         actions: [
           IconButton(
@@ -53,7 +55,7 @@ class _ViewSubjectsState extends State<ViewSubjects> {
                 elevation: 4.0,
                 margin: EdgeInsets.only(bottom: 16.0),
                 child: ListTile(
-                  title: Text(mapData['name'] ?? '', style: TextStyle(color: Colors.white),),
+                  title: Text(mapData['name'] ?? '', style: TextStyle(color: Color.fromARGB(246, 255, 208, 0)),),
                   
                   trailing: IconButton(
                     icon: Icon(Icons.delete, color: Colors.red,),
