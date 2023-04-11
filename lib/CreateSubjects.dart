@@ -132,25 +132,25 @@ class _AddSubjectScreenState extends State<AddSubjectScreen> {
             ),
             Container(
                 child: AbsorbPointer(
-  absorbing: true, // disable the dropdown button
-  child: DropdownButtonFormField(
-    items: [
-      DropdownMenuItem(
-        value: 'Option 1',
-        child: Text('Option 1'),
-      ),
-      DropdownMenuItem(
-        value: 'Option 2',
-        child: Text('Option 2'),
-      ),
-    ],
-    value: 'Option 1',
-    onChanged: (value) {},
-    decoration: InputDecoration(
-      labelText: 'Remarks',
-    ),
-  ),
-)
+                absorbing: true, // disable the dropdown button
+                child: DropdownButtonFormField(
+                  items: [
+                    DropdownMenuItem(
+                      value: 'Option 1',
+                      child: Text('Option 1'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Option 2',
+                      child: Text('Option 2'),
+                    ),
+                  ],
+                  value: 'Option 1',
+                  onChanged: (value) {},
+                  decoration: InputDecoration(
+                    labelText: 'Remarks',
+                  ),
+                ),
+              )
 
             )
               ],

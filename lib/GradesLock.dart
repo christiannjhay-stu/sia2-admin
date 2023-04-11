@@ -12,6 +12,7 @@ class _CheckboxScreenState extends State<CheckboxScreen> {
   late bool _data3 = false;
   late bool _data4 = false;
   late bool _data5 = false;
+    late bool _data6 = false;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
@@ -29,7 +30,8 @@ class _CheckboxScreenState extends State<CheckboxScreen> {
       _data2 = data['data2'];
       _data3 = data['data3'];
       _data4 = data['data4'];
-      _data4 = data['data5'];
+      _data5 = data['data5'];
+      _data6 = data['data6'];
     });
   }
 
@@ -40,6 +42,7 @@ class _CheckboxScreenState extends State<CheckboxScreen> {
       'data3': _data3,
       'data4': _data4,
       'data5': _data5,
+      'data6': _data6,
     });
   }
 
@@ -104,6 +107,17 @@ class _CheckboxScreenState extends State<CheckboxScreen> {
             onChanged: (value) {
               setState(() {
                 _data5 = value!;
+                _updateData();
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('FINAL REMAKRS',style: TextStyle(color: Color.fromARGB(246, 255, 208, 0)),),
+            value: _data6,
+            activeColor: Color.fromARGB(246, 255, 208, 0),
+            onChanged: (value) {
+              setState(() {
+                _data6 = value!;
                 _updateData();
               });
             },
