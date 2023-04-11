@@ -213,6 +213,9 @@ void addDocumentsToSubjectsAndGrades() {
                   width: 340,
                   child: TextField(
               controller: SchoolYearController,
+              style: TextStyle(
+                color: Colors.white
+              ),
               onChanged: (value) {
                 setState(() {
                   _inputText1 = value;
