@@ -103,20 +103,20 @@ void addDocumentsToSubjectsAndGrades() {
             'name': 'FILIPINO',
             'Year': Year
           });
-          //ADD 1 TO THE GRADE
-          final CollectionReference studentsCollection = FirebaseFirestore.instance.collection('students');
+         final CollectionReference studentsCollection = FirebaseFirestore.instance.collection('students');
 
-          // Get all the documents in the collection
-          final QuerySnapshot snapshot = await studentsCollection.get();
+        // Get all the documents in the collection where remarks is equal to 'Passed'
+        final QuerySnapshot snapshot = await studentsCollection.where('remarks', isEqualTo: 'Passed').get();
 
-          // Loop through each document and update the age field
-          snapshot.docs.forEach((doc) async {
-            final int age = int.parse(doc['grade']);
-            final int newAge = age + 1;
-            final String newAgeString = newAge.toString();
+        // Loop through each document and update the grade field
+        snapshot.docs.forEach((doc) async {
+          final int grade = int.parse(doc['grade']);
+          final int newGrade = grade + 1;
+          final String newGradeString = newGrade.toString();
 
-            await studentsCollection.doc(doc.id).update({'grade': newAgeString});
-          });
+          await studentsCollection.doc(doc.id).update({'grade': newGradeString});
+        });
+
 
 
           //UNENROLL
