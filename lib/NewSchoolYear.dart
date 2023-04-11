@@ -278,6 +278,7 @@ void addDocumentsToSubjectsAndGrades() {
               ),
               onPressed: () {
                   addDocumentsToSubjectsAndGrades();
+                  Navigator.pop(context);
               },
               
               child: Text('Start', style: TextStyle( fontSize: 16),),
