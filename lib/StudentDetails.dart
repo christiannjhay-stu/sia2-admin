@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:admin/Grades.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -212,9 +213,11 @@ Future<void> deleteDocuments(String documentId) async {
                     Text(data['status'], style: TextStyle(
                       color: Colors.white
                     ), 
+                    
                     ),
                   ],
                 ),
+
                 ),
               
                  Builder(
@@ -253,6 +256,37 @@ Future<void> deleteDocuments(String documentId) async {
                           ); 
                         },
                         
+                      );
+                    },
+                  ),
+                  Builder(
+                    builder: (BuildContext context) {
+                      
+                      return TextButton(
+                        onPressed: () {
+                          print(widget.documentId);
+                           Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                            return MyHomePage(studentId: widget.documentId);
+                          }));
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll < Color > (Color.fromARGB(255, 251, 183, 24)),
+                          shape: MaterialStateProperty.all < RoundedRectangleBorder > (
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+
+                            )
+                          )
+                        ),
+                        child: Text(
+                          'View Grades',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: "Noopla"
+                          ),
+
+                        ),
                       );
                     },
                   ),
